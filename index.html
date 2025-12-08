@@ -97,6 +97,43 @@
     </div>
   </div>
 
+  <!-- Announcement Modal -->
+  <div id="announcementModal" class="announcement-modal" role="dialog" aria-modal="true"
+    aria-labelledby="announcementTitle">
+    <div class="announcement-modal-content">
+      <div class="announcement-header">
+        <div class="announcement-icon">📢</div>
+        <h2 id="announcementTitle" class="announcement-title">PENGUMUMAN PENTING</h2>
+      </div>
+      <div class="announcement-body">
+        <p class="announcement-text">
+          Assalamu'alaikum Warahmatullahi Wabarakatuh,
+        </p>
+        <p class="announcement-text">
+          Sehubungan dengan terjadinya bencana di beberapa daerah dan putusnya beberapa akses jalan,
+          maka pelaksanaan <strong>OMDI 7 MTsN Kota Padang Panjang</strong> diundur menjadi:
+        </p>
+        <div class="announcement-date-box">
+          <div class="announcement-date-label">Tanggal Baru:</div>
+          <div class="announcement-date">Sabtu, 24 Januari 2026</div>
+        </div>
+        <p class="announcement-text">
+          Demikianlah informasi ini disampaikan, atas pengertiannya diucapkan terima kasih.
+        </p>
+        <p class="announcement-text">
+          Wassalamu'alaikum Warahmatullahi Wabarakatuh
+        </p>
+        <div class="announcement-signature">
+          <p><strong>TTD</strong></p>
+          <p><strong>Ketua Panitia OMDI 7</strong></p>
+        </div>
+      </div>
+      <button class="announcement-close-btn" id="closeAnnouncement" aria-label="Tutup pengumuman">
+        Tutup
+      </button>
+    </div>
+  </div>
+
   <div id="preloader">
     <div>
       <div class="spinner"></div>
@@ -439,6 +476,45 @@
     preloadAll(() => {
       percentText.textContent = '100%';
       preloader.classList.add('hidden');
+      // Start announcement modal timer after preloader is hidden
+      console.log('Preloader hidden, starting announcement modal timer...');
+      setTimeout(() => {
+        const modal = document.getElementById('announcementModal');
+        const closeBtn = document.getElementById('closeAnnouncement');
+
+        if (modal) {
+          modal.classList.add('show');
+          document.body.classList.add('announcement-modal-open');
+          console.log('Announcement modal shown!');
+
+          // Setup close button AFTER modal is shown
+          if (closeBtn) {
+            console.log('Setting up close button...');
+            closeBtn.onclick = function () {
+              console.log('Close button clicked!');
+              modal.classList.remove('show');
+              document.body.classList.remove('announcement-modal-open');
+            };
+          }
+
+          // Click outside to close
+          modal.onclick = function (e) {
+            if (e.target === modal) {
+              modal.classList.remove('show');
+              document.body.classList.remove('announcement-modal-open');
+            }
+          };
+
+          // ESC key to close
+          document.onkeydown = function (e) {
+            if (e.key === 'Escape' && modal.classList.contains('show')) {
+              modal.classList.remove('show');
+              document.body.classList.remove('announcement-modal-open');
+            }
+          };
+        }
+      }, 3000);
+
     });
 
     // ==============================
@@ -651,4 +727,40 @@
         closeImageModal();
       }
     });
+
+    // ==============================
+    // Announcement Modal - Simple Version
+    // ==============================
+    (function () {
+      const announcementModalEl = document.getElementById('announcementModal');
+      const closeBtn = document.getElementById('closeAnnouncement');
+
+      function closeAnnouncementModal() {
+        if (announcementModalEl) {
+          announcementModalEl.classList.remove('show');
+          document.body.classList.remove('announcement-modal-open');
+        }
+      }
+
+      // Close button
+      if (closeBtn) {
+        closeBtn.addEventListener('click', closeAnnouncementModal);
+      }
+
+      // Click outside
+      if (announcementModalEl) {
+        announcementModalEl.addEventListener('click', function (e) {
+          if (e.target === announcementModalEl) {
+            closeAnnouncementModal();
+          }
+        });
+      }
+
+      // ESC key
+      document.addEventListener('keydown', function (e) {
+        if (e.key === 'Escape' && announcementModalEl && announcementModalEl.classList.contains('show')) {
+          closeAnnouncementModal();
+        }
+      });
+    })();
   </script>

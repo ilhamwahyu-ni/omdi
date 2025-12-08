@@ -1300,3 +1300,224 @@ header .btn-primary:hover {
     background: rgba(255, 255, 255, 0.95);
   }
 }
+
+
+/* ========================================
+   ANNOUNCEMENT MODAL STYLES
+   ======================================== */
+
+.announcement-modal {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.6);
+  backdrop-filter: blur(4px);
+  z-index: 10000;
+  justify-content: center;
+  align-items: center;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.announcement-modal.show {
+  display: flex;
+  opacity: 1;
+  animation: fadeIn 0.3s ease forwards;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+.announcement-modal-content {
+  background: white;
+  border-radius: 24px;
+  padding: 2.5rem;
+  max-width: 600px;
+  width: 90%;
+  max-height: 85vh;
+  overflow-y: auto;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+  position: relative;
+  animation: slideUp 0.4s ease forwards;
+  border: 2px solid rgba(139, 92, 246, 0.2);
+}
+
+@keyframes slideUp {
+  from {
+    transform: translateY(30px);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+.announcement-header {
+  text-align: center;
+  margin-bottom: 2rem;
+  padding-bottom: 1.5rem;
+  border-bottom: 2px solid rgba(139, 92, 246, 0.1);
+}
+
+.announcement-icon {
+  font-size: 3rem;
+  margin-bottom: 1rem;
+  animation: bounce 1s ease infinite;
+}
+
+@keyframes bounce {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+}
+
+.announcement-title {
+  font-size: 1.8rem;
+  font-weight: 700;
+  color: var(--purple-primary);
+  margin: 0;
+  letter-spacing: 0.5px;
+}
+
+.announcement-body {
+  color: var(--text-primary);
+  line-height: 1.8;
+}
+
+.announcement-text {
+  margin-bottom: 1.2rem;
+  font-size: 1rem;
+  color: var(--text-secondary);
+}
+
+.announcement-text strong {
+  color: var(--text-primary);
+  font-weight: 600;
+}
+
+.announcement-date-box {
+  background: linear-gradient(135deg, rgba(139, 92, 246, 0.1), rgba(99, 102, 241, 0.1));
+  border-left: 4px solid var(--purple-primary);
+  padding: 1.5rem;
+  border-radius: 12px;
+  margin: 1.5rem 0;
+  text-align: center;
+}
+
+.announcement-date-label {
+  font-size: 0.9rem;
+  color: var(--text-secondary);
+  margin-bottom: 0.5rem;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  font-weight: 600;
+}
+
+.announcement-date {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: var(--purple-primary);
+}
+
+.announcement-signature {
+  margin-top: 2rem;
+  padding-top: 1.5rem;
+  border-top: 1px solid rgba(0, 0, 0, 0.1);
+  text-align: right;
+}
+
+.announcement-signature p {
+  margin: 0.3rem 0;
+  color: var(--text-primary);
+  font-size: 0.95rem;
+}
+
+.announcement-close-btn {
+  width: 100%;
+  background: var(--purple-primary);
+  color: white;
+  border: none;
+  padding: 1rem 2rem;
+  border-radius: 12px;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  margin-top: 2rem;
+  transition: all 0.3s ease;
+}
+
+.announcement-close-btn:hover {
+  background: var(--purple-dark);
+  transform: translateY(-2px);
+  box-shadow: 0 10px 25px rgba(139, 92, 246, 0.3);
+}
+
+.announcement-close-btn:active {
+  transform: translateY(0);
+}
+
+/* Responsive Design for Announcement Modal */
+@media (max-width: 768px) {
+  .announcement-modal-content {
+    padding: 2rem 1.5rem;
+    max-width: 95%;
+    max-height: 90vh;
+  }
+
+  .announcement-title {
+    font-size: 1.5rem;
+  }
+
+  .announcement-icon {
+    font-size: 2.5rem;
+  }
+
+  .announcement-text {
+    font-size: 0.95rem;
+  }
+
+  .announcement-date {
+    font-size: 1.3rem;
+  }
+
+  .announcement-close-btn {
+    padding: 0.9rem 1.5rem;
+    font-size: 0.95rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .announcement-modal-content {
+    padding: 1.5rem 1rem;
+  }
+
+  .announcement-title {
+    font-size: 1.3rem;
+  }
+
+  .announcement-date {
+    font-size: 1.2rem;
+  }
+
+  .announcement-date-box {
+    padding: 1rem;
+  }
+}
+
+/* Prevent body scroll when modal is open */
+body.announcement-modal-open {
+  overflow: hidden;
+}
