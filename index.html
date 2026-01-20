@@ -73,7 +73,7 @@
 
   <div id="modal" class="modal">
     <div class="modal-content">
-      <div class="modal-title">Maaf</div>
+      <div class="modal-title">Pendaftaran Ditutup</div>
       <div class="modal-text" id="modalMessage">Pesan akan muncul di sini</div>
       <button class="close-btn" id="closeModal">Tutup</button>
     </div>
@@ -626,9 +626,9 @@
     const closeModal2 = document.getElementById('closeModal2');
     const daftarModal2 = document.getElementById('daftarModal2');
 
-    // Rentang waktu pendaftaran
+// Rentang waktu pendaftaran - PENDAFTARAN DITUTUP
     const startTime = new Date(2025, 10, 3, 8, 0);  // 1 Nov 2025 08:00
-    const endTime = new Date(2026, 11, 13, 16, 0); // 13 Des 2025 16:00
+    const endTime = new Date(2025, 11, 13, 16, 0); // 13 Des 2025 16:00 - PENDAFTARAN DITUTUP
     const formLink = "https://docs.google.com/forms/d/e/1FAIpQLSfd-qID2Pyw1kkNbf4gJUYrbrH5C1dCvWZQtNjo9kXmjJ4WwA/viewform?usp=header";
     const formLink2 = "https://docs.google.com/forms/d/e/1FAIpQLSfsgwsuU1xbz0Xq9bMXpH6xpdfMRg3YVmOifOq7lW0KPaUDZg/viewform?usp=header";
 
@@ -637,8 +637,8 @@
     const SHEET_NAME = "Data Rapi";
     const sheetUrl = `https://docs.google.com/spreadsheets/d/${SPREADSHEET_ID}/gviz/tq?tqx=out:csv&sheet=${encodeURIComponent(SHEET_NAME)}`;
 
-    function showModal(message) {
-      modalMessage.textContent = message;
+function showModal(message) {
+      modalMessage.innerHTML = message.replace(/\n/g, '<br>');
       modal.style.display = "flex";
     }
     function showModal2() {
@@ -649,42 +649,17 @@
     daftarModal2.addEventListener('click', () => window.location.href = formLink);
     daftarModal3.addEventListener('click', () => window.location.href = formLink2);
 
-    daftarBtns.forEach(function (btn) {
+daftarBtns.forEach(function (btn) {
+      // Non-aktifkan tombol daftar
+      btn.style.opacity = "0.5";
+      btn.style.cursor = "not-allowed";
+      btn.setAttribute("disabled", "disabled");
+      
       btn.addEventListener('click', function (e) {
         e.preventDefault();
-        const now = new Date();
-
-        // Cek waktu pendaftaran
-        if (now < startTime) {
-          showModal("Pendaftaran dibuka pada: " + startTime.toLocaleString());
-          return;
-        }
-        if (now > endTime) {
-          showModal("Pendaftaran sudah ditutup.");
-          return;
-        }
-
-        // Cek kuota di Google Sheet (saat tombol ditekan)
-        fetch(sheetUrl)
-          .then(res => res.text())
-          .then(csvText => {
-            const rows = csvText.trim().split("\n");
-            const dataRows = rows.slice(1);
-            const barisTerisi = dataRows.filter(row => row.split(",").some(cell => cell.trim() !== "")).length;
-            console.log("Jumlah baris terisi:", barisTerisi);
-
-            if (barisTerisi >= 929) {
-              showModal("❌ Maaf, kuota pendaftaran telah penuh.");
-            } else {
-              showModal2();
-            }
-          })
-          .catch(err => {
-            console.error("Gagal mengambil data spreadsheet:", err);
-            showModal("❌ Gagal memeriksa kuota. Pastikan spreadsheet dipublikasikan & koneksi stabil.");
-          });
-
-
+        
+        // Tampilkan modal pendaftaran ditutup
+        showModal("❌ Pendaftaran OMDI TSANCOFA 7 telah ditutup.\n\nTerima kasih atas partisipasi Anda. Untuk informasi lebih lanjut, silakan hubungi panitia melalui kontak yang tersedia.");
       });
     });
 
