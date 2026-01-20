@@ -110,23 +110,16 @@
           Assalamu'alaikum Warahmatullahi Wabarakatuh,
         </p>
         <p class="announcement-text">
-          Sehubungan dengan terjadinya bencana di beberapa daerah dan putusnya beberapa akses jalan,
-          maka pelaksanaan <strong>OMDI 7 MTsN Kota Padang Panjang</strong> diundur menjadi:
+          OMDI TSANCOFA 7 Dilaksanakan pada:
         </p>
         <div class="announcement-date-box">
-          <div class="announcement-date-label">Tanggal Baru:</div>
+          <div class="announcement-date-label">Pelaksanaan:</div>
           <div class="announcement-date">Sabtu, 24 Januari 2026</div>
         </div>
         <p class="announcement-text">
-          Demikianlah informasi ini disampaikan, atas pengertiannya diucapkan terima kasih.
+          Demikianlah informasi ini disampaikan, kami mengundang seluruh peserta untuk berpartisipasi dalam OMDI
+          TSANCOFA 7. <strong>Persiapkan diri untuk menghadapi lomba</strong> dan tunjukkan yang terbaik!
         </p>
-        <p class="announcement-text">
-          Wassalamu'alaikum Warahmatullahi Wabarakatuh
-        </p>
-        <div class="announcement-signature">
-          <p><strong>TTD</strong></p>
-          <p><strong>Ketua Panitia OMDI 7</strong></p>
-        </div>
       </div>
       <button class="announcement-close-btn" id="closeAnnouncement" aria-label="Tutup pengumuman">
         Tutup
@@ -626,7 +619,7 @@
     const closeModal2 = document.getElementById('closeModal2');
     const daftarModal2 = document.getElementById('daftarModal2');
 
-// Rentang waktu pendaftaran - PENDAFTARAN DITUTUP
+    // Rentang waktu pendaftaran - PENDAFTARAN DITUTUP
     const startTime = new Date(2025, 10, 3, 8, 0);  // 1 Nov 2025 08:00
     const endTime = new Date(2025, 11, 13, 16, 0); // 13 Des 2025 16:00 - PENDAFTARAN DITUTUP
     const formLink = "https://docs.google.com/forms/d/e/1FAIpQLSfd-qID2Pyw1kkNbf4gJUYrbrH5C1dCvWZQtNjo9kXmjJ4WwA/viewform?usp=header";
@@ -637,7 +630,7 @@
     const SHEET_NAME = "Data Rapi";
     const sheetUrl = `https://docs.google.com/spreadsheets/d/${SPREADSHEET_ID}/gviz/tq?tqx=out:csv&sheet=${encodeURIComponent(SHEET_NAME)}`;
 
-function showModal(message) {
+    function showModal(message) {
       modalMessage.innerHTML = message.replace(/\n/g, '<br>');
       modal.style.display = "flex";
     }
@@ -649,15 +642,15 @@ function showModal(message) {
     daftarModal2.addEventListener('click', () => window.location.href = formLink);
     daftarModal3.addEventListener('click', () => window.location.href = formLink2);
 
-daftarBtns.forEach(function (btn) {
+    daftarBtns.forEach(function (btn) {
       // Non-aktifkan tombol daftar
       btn.style.opacity = "0.5";
       btn.style.cursor = "not-allowed";
       btn.setAttribute("disabled", "disabled");
-      
+
       btn.addEventListener('click', function (e) {
         e.preventDefault();
-        
+
         // Tampilkan modal pendaftaran ditutup
         showModal("❌ Pendaftaran OMDI TSANCOFA 7 telah ditutup.\n\nTerima kasih atas partisipasi Anda. Untuk informasi lebih lanjut, silakan hubungi panitia melalui kontak yang tersedia.");
       });
